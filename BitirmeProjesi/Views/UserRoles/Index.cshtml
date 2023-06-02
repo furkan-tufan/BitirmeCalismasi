@@ -1,16 +1,18 @@
 ﻿@using Bitirme.Models
 @model List<Bitirme.Models.AppUserViewModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Personel Yönetimi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>User Roles</h1>
-<table class="table table-striped">
-    <thead>
+<h3>@ViewData["Title"]</h3>
+<table class="table table-striped mt-2">
+    <thead >
         <tr>
             <th>İsim</th>
-            <th>Email</th>
-            <th>Roller</th>
+            <th>İşe Başlama Tarihi</th>
+            <th>Maaş</th>
+            <th>E-Posta</th>
+            <th>Pozisyon</th>
             <th></th>
         </tr>
     </thead>
@@ -19,10 +21,13 @@
         {
             <tr>
                 <td>@user.Name</td>
+                <td>@user.StartDate</td>
+                <td>@user.Salary</td>
                 <td>@user.Email</td>
                 <td>@string.Join(" , ", user.Roles.ToList())</td>
-                <td>
-                    <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Rolleri Düzenle</a>
+                <td class="text-right">
+                    <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Manage" asp-route-userId="@user.UserId">Pozisyonu Düzenle</a>
+                    <a class="btn btn-primary" asp-controller="UserRoles" asp-action="Edit" asp-route-userId="@user.UserId">Bilgileri Düzenle</a>
                 </td>
             </tr>
         }

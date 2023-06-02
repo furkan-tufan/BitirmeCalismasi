@@ -67,6 +67,15 @@ namespace BitirmeProjesi.Areas.Identity.Pages.Account
             [Phone]
             [Display(Name = "Telefon Numarası")]
             public string PhoneNumber { get; set; }
+
+            [Display(Name = "Maaş")]
+            [Required(ErrorMessage = "Maaş Girin")]
+            public int? Salary { get; set; }
+
+            [Display(Name = "İşe Giriş Tarihi")]
+            [Required(ErrorMessage = "Tarih Girin")]
+            [DataType(DataType.Date)]
+            public DateTime? StartDate { get; set; }
         }
 
         public async Task OnGetAsync(string? returnUrl = null)
@@ -84,6 +93,8 @@ namespace BitirmeProjesi.Areas.Identity.Pages.Account
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 user.Name = Input.Name;
                 user.PhoneNumber = Input.PhoneNumber;
+                user.Salary = Input.Salary;
+                user.StartDate = Input.StartDate;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

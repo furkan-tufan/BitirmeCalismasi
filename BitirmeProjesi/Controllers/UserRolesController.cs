@@ -22,6 +22,11 @@ public class UserRolesController : Controller
             var thisViewModel = new AppUserViewModel();
             thisViewModel.UserId = user.Id;
             thisViewModel.Email = user.Email;
+            thisViewModel.Salary = user.Salary;
+            thisViewModel.Permission = user.Permission;
+            thisViewModel.IsActive = user.IsActive;
+            thisViewModel.StartDate = user.StartDate;
+            thisViewModel.EndDate = user.EndDate;
             thisViewModel.Name = user.Name;
             thisViewModel.Roles = await GetUserRoles(user);
             userRolesViewModel.Add(thisViewModel);
