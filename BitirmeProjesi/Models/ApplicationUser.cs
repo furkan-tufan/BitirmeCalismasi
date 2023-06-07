@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Policy;
 using System.Xml.Linq;
 
 namespace BitirmeProjesi.Models
@@ -29,5 +30,8 @@ namespace BitirmeProjesi.Models
         public bool IsActive { get; set; }
 
         public int Permission { get; set; }
+
+        public virtual List<Request>? Requests { get; set; }
+
     }
 }

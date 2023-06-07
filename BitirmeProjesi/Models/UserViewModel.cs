@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 namespace Bitirme.Models
 {
-    public class AppUserViewModel
+    public class UserViewModel
     {
-        public AppUserViewModel()
+        public UserViewModel()
         {
             IsActive = true;
             Permission = 0;
@@ -18,5 +18,6 @@ namespace Bitirme.Models
         public int? Salary { get; set; }
         public int Permission { get; set; }
         public DateTime? EndDate { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }

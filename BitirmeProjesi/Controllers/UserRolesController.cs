@@ -1,4 +1,5 @@
 ﻿using Bitirme.Models;
+using BitirmeProjesi.Data;
 using BitirmeProjesi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,18 +9,20 @@ public class UserRolesController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
-    public UserRolesController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+    private readonly ApplicationDbContext _context;
+    public UserRolesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         _roleManager = roleManager;
         _userManager = userManager;
+        _context = context;
     }
     public async Task<IActionResult> Index()
     {
         var users = await _userManager.Users.ToListAsync();
-        var userRolesViewModel = new List<AppUserViewModel>();
+        var userRolesViewModel = new List<UserViewModel>();
         foreach (ApplicationUser user in users)
         {
-            var thisViewModel = new AppUserViewModel();
+            var thisViewModel = new UserViewModel();
             thisViewModel.UserId = user.Id;
             thisViewModel.Email = user.Email;
             thisViewModel.Salary = user.Salary;
@@ -47,10 +50,10 @@ public class UserRolesController : Controller
             return View("NotFound");
         }
         ViewBag.UserName = user.UserName;
-        var model = new List<ManageUserRolesViewModel>();
+        var model = new List<UserRolesViewModel>();
         foreach (var role in _roleManager.Roles)
         {
-            var userRolesViewModel = new ManageUserRolesViewModel
+            var userRolesViewModel = new UserRolesViewModel
             {
                 RoleId = role.Id,
                 RoleName = role.Name
@@ -68,7 +71,7 @@ public class UserRolesController : Controller
         return View(model);
     }
     [HttpPost]
-    public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
+    public async Task<IActionResult> Manage(List<UserRolesViewModel> model, string userId)
     {
         var user = await _userManager.FindByIdAsync(userId);
         if (user == null)
@@ -88,6 +91,82 @@ public class UserRolesController : Controller
             ModelState.AddModelError("", "Cannot add selected roles to user");
             return View(model);
         }
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> Edit(string userId)
+    {
+        if (userId == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        var thisViewModel = new UserViewModel();
+        thisViewModel.UserId = user.Id;
+        thisViewModel.Email = user.Email;
+        thisViewModel.PhoneNumber = user.PhoneNumber;
+        thisViewModel.Salary = user.Salary;
+        thisViewModel.Permission = user.Permission;
+        thisViewModel.IsActive = user.IsActive;
+        thisViewModel.StartDate = user.StartDate;
+        thisViewModel.EndDate = user.EndDate;
+        thisViewModel.Name = user.Name;
+        return View(thisViewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(UserViewModel userView)
+    {
+        var user = await _userManager.FindByIdAsync(userView.UserId);
+        user.Name = userView.Name;
+        user.Email = userView.Email;
+        user.Salary = userView.Salary;
+        user.Permission = userView.Permission;
+        user.IsActive = userView.IsActive;
+        user.EndDate = userView.EndDate;
+        user.StartDate = userView.StartDate;
+        user.PhoneNumber = userView.PhoneNumber;
+        await _userManager.UpdateAsync(user);
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> Active(string userId)
+    {
+        if (userId == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        user.IsActive = true;
+        await _userManager.UpdateAsync(user);
+        await _context.SaveChangesAsync();
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> InActive(string userId)
+    {
+        if (userId == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        user.IsActive = false;
+        await _userManager.UpdateAsync(user);
+        await _context.SaveChangesAsync();
         return RedirectToAction("Index");
     }
 }

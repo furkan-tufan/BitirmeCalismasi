@@ -1,6 +1,6 @@
 ﻿namespace Bitirme.Models
 {
-    public class AppRoleViewModel
+    public class RoleViewModel
     {
         public string? RoleId { get; set; }
         public string? RoleName { get; set; }

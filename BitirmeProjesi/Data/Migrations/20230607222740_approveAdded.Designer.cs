@@ -4,6 +4,7 @@ using BitirmeProjesi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BitirmeProjesi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230607222740_approveAdded")]
+    partial class approveAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,7 +110,7 @@ namespace BitirmeProjesi.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("BitirmeProjesi.Models.Request", b =>
+            modelBuilder.Entity("BitirmeProjesi.Models.Leave", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -134,7 +136,7 @@ namespace BitirmeProjesi.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Request");
+                    b.ToTable("Leave");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -270,10 +272,10 @@ namespace BitirmeProjesi.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BitirmeProjesi.Models.Request", b =>
+            modelBuilder.Entity("BitirmeProjesi.Models.Leave", b =>
                 {
                     b.HasOne("BitirmeProjesi.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Requests")
+                        .WithMany("Leaves")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -334,7 +336,7 @@ namespace BitirmeProjesi.Data.Migrations
 
             modelBuilder.Entity("BitirmeProjesi.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Requests");
+                    b.Navigation("Leaves");
                 });
 #pragma warning restore 612, 618
         }

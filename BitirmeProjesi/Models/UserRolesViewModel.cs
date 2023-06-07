@@ -1,6 +1,6 @@
 ﻿namespace BitirmeProjesi.Models
 {
-    public class ManageUserRolesViewModel
+    public class UserRolesViewModel
     {
         public string RoleId { get; set; }
         public string RoleName { get; set; }
