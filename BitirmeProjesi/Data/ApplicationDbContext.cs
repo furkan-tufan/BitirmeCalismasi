@@ -11,6 +11,8 @@ namespace BitirmeProjesi.Data
         {
         }
         public DbSet<BitirmeProjesi.Models.Request>? Request { get; set; }
+        public DbSet<BitirmeProjesi.Models.Course>? Course { get; set; }
+        public DbSet<BitirmeProjesi.Models.EmployeeCourses>? EmployeeCourses { get; set; }
 
     }
 }

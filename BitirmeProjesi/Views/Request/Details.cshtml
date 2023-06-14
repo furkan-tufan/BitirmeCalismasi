@@ -1,42 +1,68 @@
-﻿@model BitirmeProjesi.Models.Request
+﻿@model BitirmeProjesi.Models.RequestViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "İzin Detayları";
 }
 
-<h1>Details</h1>
+<h1>İzin Detayları</h1>
 
 <div>
     <h4>Request</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationUser.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationUser.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationUser.Permission)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationUser.Permission) Gün
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationUser.Salary)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationUser.Salary)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ApplicationUser.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ApplicationUser.StartDate)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.StartDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.StartDate)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EndDate)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EndDate)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplicationUser)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ApplicationUser.Id)
-        </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Approve)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Approve)
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Details" method="post">
+            <input class="form-check-input" asp-for="Approve" /> @Html.DisplayNameFor(model => model.Approve)
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 </div>
+

@@ -4,50 +4,46 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2>İzin Talepleri</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                Talep Sahibi
+            </th>
+            <th>
+                Kalan İzin Sayısı
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApplicationUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Approve)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Approve)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.Permission) Gün
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Detaylar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

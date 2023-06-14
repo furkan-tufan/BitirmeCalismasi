@@ -4,6 +4,7 @@ using BitirmeProjesi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BitirmeProjesi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230614185905_check")]
+    partial class check
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,51 +108,6 @@ namespace BitirmeProjesi.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("BitirmeProjesi.Models.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Application")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Link")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Course");
-                });
-
-            modelBuilder.Entity("BitirmeProjesi.Models.EmployeeCourses", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeCourses");
                 });
 
             modelBuilder.Entity("BitirmeProjesi.Models.Request", b =>
@@ -318,21 +275,6 @@ namespace BitirmeProjesi.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BitirmeProjesi.Models.EmployeeCourses", b =>
-                {
-                    b.HasOne("BitirmeProjesi.Models.Course", "Course")
-                        .WithMany("EmployeeCourses")
-                        .HasForeignKey("CourseId");
-
-                    b.HasOne("BitirmeProjesi.Models.ApplicationUser", "Employee")
-                        .WithMany("EmployeeCourses")
-                        .HasForeignKey("EmployeeId");
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("BitirmeProjesi.Models.Request", b =>
                 {
                     b.HasOne("BitirmeProjesi.Models.ApplicationUser", "ApplicationUser")
@@ -397,14 +339,7 @@ namespace BitirmeProjesi.Data.Migrations
 
             modelBuilder.Entity("BitirmeProjesi.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("EmployeeCourses");
-
                     b.Navigation("Requests");
-                });
-
-            modelBuilder.Entity("BitirmeProjesi.Models.Course", b =>
-                {
-                    b.Navigation("EmployeeCourses");
                 });
 #pragma warning restore 612, 618
         }

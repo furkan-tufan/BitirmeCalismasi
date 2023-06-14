@@ -558,3 +558,5 @@ C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\obj\Debug\net6.0\refint\Bi
 C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\obj\Debug\net6.0\BitirmeProjesi.pdb
 C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\obj\Debug\net6.0\BitirmeProjesi.genruntimeconfig.cache
 C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\obj\Debug\net6.0\ref\BitirmeProjesi.dll
+C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\AspNetCoreHero.ToastNotification.Views.dll
+C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\AspNetCoreHero.ToastNotification.dll

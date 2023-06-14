@@ -32,6 +32,8 @@ namespace BitirmeProjesi.Models
         public int Permission { get; set; }
 
         public virtual List<Request>? Requests { get; set; }
+        public IEnumerable<EmployeeCourses>? EmployeeCourses { get; set; }
+
 
     }
 }
