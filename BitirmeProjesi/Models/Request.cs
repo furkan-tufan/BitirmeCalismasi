@@ -5,7 +5,11 @@ namespace BitirmeProjesi.Models
 {
     public class Request
     {
-        public Request() { Approve = false; }
+        public Request() { 
+            Approve = false;
+            Check = false;
+        }
+
         public int Id { get; set; }
         [Display(Name = "İzin Başlangıç Tarihi")]
         [Required(ErrorMessage = "Tarih Girin")]
@@ -20,5 +24,6 @@ namespace BitirmeProjesi.Models
         public string ApplicationUserId { get; set; }
 
         public bool Approve { get; set; }
+        public bool Check { get; set; }
     }
 }

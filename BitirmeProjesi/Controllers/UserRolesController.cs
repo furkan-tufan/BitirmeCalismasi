@@ -1,10 +1,11 @@
 ﻿using Bitirme.Models;
 using BitirmeProjesi.Data;
 using BitirmeProjesi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+[Authorize]
 public class UserRolesController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;

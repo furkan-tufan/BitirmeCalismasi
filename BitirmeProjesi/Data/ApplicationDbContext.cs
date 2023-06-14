@@ -10,5 +10,7 @@ namespace BitirmeProjesi.Data
             : base(options)
         {
         }
+        public DbSet<BitirmeProjesi.Models.Request>? Request { get; set; }
+
     }
 }

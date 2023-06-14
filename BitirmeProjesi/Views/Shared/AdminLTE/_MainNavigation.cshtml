@@ -3,7 +3,41 @@
     <div class="sidebar">
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>
+                            İnsan Kaynakları
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="UserRoles" asp-action="Index" class="nav-link">
+                                <p>&emsp;&emsp;Çalışanlar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="RoleManager" asp-action="Index" class="nav-link">
+                                <p>&emsp;&emsp; Roller</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Department" asp-action="Index" class="nav-link">
+                                <p>&emsp;&emsp; Departmanlar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
+                <li class="nav-item">
+                    <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" class="nav-link" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>
+                            Çıkış Yap
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

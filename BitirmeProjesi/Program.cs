@@ -1,6 +1,8 @@
 using BitirmeProjesi.Data;
 using BitirmeProjesi.Models;
 using Microsoft.AspNetCore.Identity;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
             .AddDefaultUI()
             .AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
+builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
 
 var app = builder.Build();
 

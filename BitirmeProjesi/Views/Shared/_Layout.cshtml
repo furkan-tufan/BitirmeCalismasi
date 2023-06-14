@@ -35,6 +35,7 @@
         </aside>
     </div>
     <partial name="AdminLTE/_Scripts" />
+    @await Component.InvokeAsync("Notyf")
     @RenderSection("Scripts", required: false)
 </body>
 </html>
