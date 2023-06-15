@@ -4,7 +4,11 @@
     ViewData["Title"] = "Personel Yönetimi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h3>@ViewData["Title"]</h3>
+<h3 class="d-inline-block">@ViewData["Title"]</h3>
+<div class="float-right d-inline-block">
+    <a class="btn btn-md btn-success" asp-area="Identity" asp-page="/Account/Register">Yeni Personel Ekle</a>
+    <a class="btn btn-md btn-primary" asp-action="ExportToExcel">Excel'e Aktar</a>
+</div>
 <table class="table table-striped mt-2">
     <thead >
         <tr>

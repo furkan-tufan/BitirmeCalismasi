@@ -1,0 +1,35 @@
+﻿@model List<BitirmeProjesi.Models.Department>
+@{
+    ViewData["Title"] = "Departman Yönetimi";
+}
+
+<h3 class="d-inline-block">@ViewData["Title"]</h3>
+<hr />
+<br />
+
+<form method="post" asp-action="Create" asp-controller="Department" class="col-md-6" autocomplete="off">
+    <div class="input-group">
+        <input name="depName" class="form-control col-md-9">
+        <span class="input-group-btn col-md-3">
+            <button class="btn btn-success col-md-12">Departman Ekle</button>
+        </span>
+    </div>
+</form>
+<br />
+<table class="table table-striped col-md-6 mt-2">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Departman Adı</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dep in Model)
+        {
+            <tr>
+                <td>@dep.DepartmentId </td>
+                <td>@dep.DepartmentName</td>
+            </tr>
+        }
+    </tbody>
+</table>

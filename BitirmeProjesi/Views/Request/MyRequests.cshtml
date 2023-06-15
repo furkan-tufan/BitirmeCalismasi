@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BitirmeProjesi.Models.Request>
+
+@{
+    ViewData["Title"] = "İzin Taleplerim";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<table class="table table-striped col-md-6 mt-3">
+    <thead>
+        <tr>
+            <th>
+                Talep Sahibi
+            </th>
+            <th>
+                Kalan İzin Sayısı
+            </th>
+            <th>
+                Kabul Durumu
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.Permission) Gün
+                </td>
+                @if (!item.Check)
+                {
+                    <td class="text-secondary">
+                        Onay Bekliyor
+                    </td>
+                }
+                else
+                {
+                    @if (item.Approve)
+                    {
+                        <td class="text-success">
+                            Onaylandı
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-danger">
+                            Reddedildi
+                        </td>
+                    }
+
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Detaylar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

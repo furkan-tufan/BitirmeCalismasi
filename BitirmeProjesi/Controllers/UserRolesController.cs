@@ -1,17 +1,19 @@
 ﻿using Bitirme.Models;
 using BitirmeProjesi.Data;
 using BitirmeProjesi.Models;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-[Authorize]
+
+[Authorize(Roles = "İnsan Kaynakları")]
 public class UserRolesController : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly RoleManager<ApplicationRole> _roleManager;
     private readonly ApplicationDbContext _context;
-    public UserRolesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+    public UserRolesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
     {
         _roleManager = roleManager;
         _userManager = userManager;
@@ -137,37 +139,33 @@ public class UserRolesController : Controller
         return RedirectToAction("Index");
     }
 
-    public async Task<IActionResult> Active(string userId)
+    public ActionResult ExportToExcel()
     {
-        if (userId == null)
+        System.Data.DataTable table = GetData();
+        string fileName = "Çalışan Listesi.xlsx";
+        using (XLWorkbook wb = new XLWorkbook())
         {
-            return RedirectToAction("Index", "Home");
+            wb.Worksheets.Add(table);
+            using (MemoryStream stream = new MemoryStream())
+            {
+                wb.SaveAs(stream);
+                return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            }
         }
-        var user = await _userManager.FindByIdAsync(userId);
-        if (user == null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
-        user.IsActive = true;
-        await _userManager.UpdateAsync(user);
-        await _context.SaveChangesAsync();
-        return RedirectToAction("Index");
     }
 
-    public async Task<IActionResult> InActive(string userId)
+    private System.Data.DataTable GetData()
     {
-        if (userId == null)
+        System.Data.DataTable table = new System.Data.DataTable();
+        table.TableName = "Çalışan Listesi";
+        table.Columns.Add("Çalışan İsmi");
+        table.Columns.Add("Çalışan E-Postası");
+        var data = _userManager.Users.ToList();
+        for (int i = 0; i < data.Count(); i++)
         {
-            return RedirectToAction("Index", "Home");
+            table.Rows.Add(data[i].Name, data[i].Email);
         }
-        var user = await _userManager.FindByIdAsync(userId);
-        if (user == null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
-        user.IsActive = false;
-        await _userManager.UpdateAsync(user);
-        await _context.SaveChangesAsync();
-        return RedirectToAction("Index");
+        table.AcceptChanges();
+        return table;
     }
 }

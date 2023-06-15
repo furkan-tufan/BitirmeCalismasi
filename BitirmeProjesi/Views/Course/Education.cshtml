@@ -1,0 +1,37 @@
+﻿@model BitirmeProjesi.Models.Course
+@{
+    ViewData["Title"] = "Eğitimin Atacanağı Çalışanlar ( " + Model.Name + " )";
+}
+
+<h3>@ViewData["Title"]</h3>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Education" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Name" />
+            <input type="hidden" asp-for="Link" />
+
+            @foreach (ApplicationUser user in ViewBag.Workers)
+            {
+                @if (user.EmployeeCourses.Any(i => i.CourseId == Model.Id))
+                {
+                    <input type="checkbox" name="userId" value="@user.Id" checked />
+                }
+                else
+                {
+                    <input type="checkbox" name="userId" value="@user.Id" />
+
+                }
+                @user.Name
+                <br>
+            }
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

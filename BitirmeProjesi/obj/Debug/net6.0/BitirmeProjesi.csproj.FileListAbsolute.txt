@@ -560,3 +560,10 @@ C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\obj\Debug\net6.0\BitirmePr
 C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\obj\Debug\net6.0\ref\BitirmeProjesi.dll
 C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\AspNetCoreHero.ToastNotification.Views.dll
 C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\AspNetCoreHero.ToastNotification.dll
+C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\ClosedXML.dll
+C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\ExcelNumberFormat.dll
+C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\Irony.dll
+C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\SixLabors.Fonts.dll
+C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\System.IO.Packaging.dll
+C:\Users\Furkan\Desktop\BitirmeProjesi\BitirmeProjesi\bin\Debug\net6.0\XLParser.dll

@@ -116,9 +116,6 @@ namespace BitirmeProjesi.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Application")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
@@ -127,7 +124,23 @@ namespace BitirmeProjesi.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Course");
+                    b.ToTable("Course", (string)null);
+                });
+
+            modelBuilder.Entity("BitirmeProjesi.Models.Department", b =>
+                {
+                    b.Property<int>("DepartmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DepartmentId"), 1L, 1);
+
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DepartmentId");
+
+                    b.ToTable("Department", (string)null);
                 });
 
             modelBuilder.Entity("BitirmeProjesi.Models.EmployeeCourses", b =>
@@ -144,13 +157,52 @@ namespace BitirmeProjesi.Data.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("EmployeeCourses");
+                    b.ToTable("EmployeeCourses", (string)null);
+                });
+
+            modelBuilder.Entity("BitirmeProjesi.Models.FileModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedOn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UploadedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequestId");
+
+                    b.ToTable("FileModel", (string)null);
                 });
 
             modelBuilder.Entity("BitirmeProjesi.Models.Request", b =>
@@ -182,7 +234,7 @@ namespace BitirmeProjesi.Data.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Request");
+                    b.ToTable("Request", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -192,6 +244,10 @@ namespace BitirmeProjesi.Data.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -210,6 +266,8 @@ namespace BitirmeProjesi.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -318,6 +376,18 @@ namespace BitirmeProjesi.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BitirmeProjesi.Models.ApplicationRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasDiscriminator().HasValue("ApplicationRole");
+                });
+
             modelBuilder.Entity("BitirmeProjesi.Models.EmployeeCourses", b =>
                 {
                     b.HasOne("BitirmeProjesi.Models.Course", "Course")
@@ -331,6 +401,15 @@ namespace BitirmeProjesi.Data.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("BitirmeProjesi.Models.FileModel", b =>
+                {
+                    b.HasOne("BitirmeProjesi.Models.Request", "Request")
+                        .WithMany("FileList")
+                        .HasForeignKey("RequestId");
+
+                    b.Navigation("Request");
                 });
 
             modelBuilder.Entity("BitirmeProjesi.Models.Request", b =>
@@ -395,6 +474,15 @@ namespace BitirmeProjesi.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("BitirmeProjesi.Models.ApplicationRole", b =>
+                {
+                    b.HasOne("BitirmeProjesi.Models.Department", "Department")
+                        .WithMany("Roles")
+                        .HasForeignKey("DepartmentId");
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("BitirmeProjesi.Models.ApplicationUser", b =>
                 {
                     b.Navigation("EmployeeCourses");
@@ -405,6 +493,16 @@ namespace BitirmeProjesi.Data.Migrations
             modelBuilder.Entity("BitirmeProjesi.Models.Course", b =>
                 {
                     b.Navigation("EmployeeCourses");
+                });
+
+            modelBuilder.Entity("BitirmeProjesi.Models.Department", b =>
+                {
+                    b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("BitirmeProjesi.Models.Request", b =>
+                {
+                    b.Navigation("FileList");
                 });
 #pragma warning restore 612, 618
         }

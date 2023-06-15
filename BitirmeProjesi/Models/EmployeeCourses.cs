@@ -4,6 +4,10 @@ namespace BitirmeProjesi.Models
 {
     public class EmployeeCourses
     {
+        public EmployeeCourses()
+        {
+            IsActive = true;
+        }
         public int Id { get; set; }
 
         public ApplicationUser? Employee { get; set; }
@@ -13,5 +17,8 @@ namespace BitirmeProjesi.Models
         public Course? Course { get; set; }
         [ForeignKey("Project")]
         public int? CourseId { get; set; }
+
+        public bool IsActive { get; set; }
+
     }
 }

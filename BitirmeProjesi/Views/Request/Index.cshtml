@@ -4,9 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>İzin Talepleri</h2>
+<h3>İzin Talepleri</h3>
 
-<table class="table">
+<table class="table table-striped col-md-6 mt-3">
     <thead>
         <tr>
             <th>
@@ -40,7 +40,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
-                <td>
+                <td class="text-right">
                     <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Detaylar</a>
                 </td>
             </tr>

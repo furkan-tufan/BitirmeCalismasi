@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BitirmeProjesi.Models.Course>
+
+@{
+    ViewData["Title"] = "Eğitim Listesi";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-success btn-md col-md-6">Yeni Eğitim Oluştur</a>
+</p>
+<table class="table table-striped col-md-6 mt-3">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Link)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Link)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-sm btn-primary" asp-action="Education" asp-route-id="@item.Id">Personele Ata</a>
+                    <a class="btn btn-sm btn-info" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Kaldır</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

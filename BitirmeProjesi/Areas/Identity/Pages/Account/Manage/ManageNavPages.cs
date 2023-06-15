@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using BitirmeProjesi.Models;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
 namespace BitirmeProjesi.Areas.Identity.Pages.Account.Manage
 {
     public static class ManageNavPages

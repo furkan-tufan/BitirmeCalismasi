@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BitirmeProjesi.Models
 {
@@ -25,5 +25,9 @@ namespace BitirmeProjesi.Models
 
         public bool Approve { get; set; }
         public bool Check { get; set; }
+
+        [NotMapped]
+        public virtual List<IFormFile>? Files { get; set; } = new List<IFormFile>();
+        public virtual List<FileModel>? FileList { get; set; } = new List<FileModel>();
     }
 }
